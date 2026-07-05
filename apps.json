@@ -26,41 +26,45 @@
       "id": "appify",
       "name": "Appify",
       "category": "appimage",
-      "source_type": "static_url",
+      "source_type": "github_release",
       "description": "Web Application Manager",
-      "url": "https://github.com/bobbycomet/Appify/releases/download/v3.0.0/Appify-3.0.0-x86_64.AppImage",
-      "version_regex": "appify-([0-9.]+)\\.deb",
+      "github_owner": "bobbycomet",
+      "github_repo": "Appify",
+      "asset_pattern": "Appify.*\\.AppImage$",
       "package_name": "appify"
     },
     {
       "id": "xkm",
       "name": "XKM",
       "category": "deb",
-      "source_type": "static_url",
+      "source_type": "github_release",
       "description": "Kernel Manager",
-      "url": "https://github.com/bobbycomet/XKM-Multi-Kernel-Manager/releases/download/v2.0.1/xkm-2.0.1.deb",
-      "version_regex": "XKM-([0-9.]+)\\.deb",
+      "github_owner": "bobbycomet",
+      "github_repo": "XKM-Multi-Kernel-Manager",
+      "asset_pattern": "xkm.*\\.deb$",
       "package_name": "xkm"
     },
     {
       "id": "sentry",
       "name": "Sentry",
       "category": "deb",
-      "source_type": "static_url",
+      "source_type": "github_release",
       "description": "Adaptive Process Monitoring",
-      "url": "https://github.com/bobbycomet/Process-Sentry/releases/download/v3.1.0/sentry-v3.1.0.deb",
-      "version_regex": "sentry-([0-9.]+)\\.deb",
+      "github_owner": "bobbycomet",
+      "github_repo": "Process-Sentry",
+      "asset_pattern": "sentry.*\\.deb$",
       "package_name": "sentry"
     },
     {
       "id": "kernel-autotune",
-      "name": "keernel-autotune",
+      "name": "Kernel Autotune",
       "category": "deb",
-      "source_type": "static_url",
-      "description": "Automated System Tuning",
-      "url": "https://github.com/bobbycomet/kernel-autotune-V2/releases/download/v2.3.0/kernel-autotune_2.3.0.deb",
-      "version_regex": "kernel-autotune-([0-9.]+)\\.deb",
-      "package_name": "sentry"
+      "source_type": "github_release",
+      "description": "Automatic kernel/hardware performance tuning.",
+      "github_owner": "bobbycomet",
+      "github_repo": "kernel-autotune-V2",
+      "asset_pattern": "kernel-autotune.*\\.deb$",
+      "package_name": "kernel-autotune"
     }
   ]
 }
