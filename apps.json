@@ -51,6 +51,6 @@
       "url": "https://github.com/bobbycomet/Process-Sentry/releases/download/v3.1.0/sentry-v3.1.0.deb",
       "version_regex": "discord-([0-9.]+)\\.deb",
       "package_name": "sentry"
-    },
+    }
   ]
 }
