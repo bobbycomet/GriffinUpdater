@@ -42,7 +42,7 @@
       "github_owner": "bobbycomet",
       "github_repo": "XKM-Multi-Kernel-Manager",
       "asset_pattern": "xkm.*\\.deb$",
-      "package_name": "xkm"
+      "package_name": "xkm-multi-kernel-manager"
     },
     {
       "id": "sentry",
@@ -53,7 +53,7 @@
       "github_owner": "bobbycomet",
       "github_repo": "Process-Sentry",
       "asset_pattern": "sentry.*\\.deb$",
-      "package_name": "sentry"
+      "package_name": "process-sentry"
     },
     {
       "id": "kernel-autotune",
