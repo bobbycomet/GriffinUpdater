@@ -8,7 +8,9 @@ The result is meant to feel like the update experience Windows switchers already
 
 ## Requests to be added
 
-If you have an application that you want to get added to the `apps.json` join the Disocrd for Griffin and put it in the feature request channel. If you try to add it yourself, it is protected by CODEOWNERS, and I will check it out, but Discord is much faster for me to see. [GRIFFIN DISCORD](https://discord.gg/fMCpeNCxhv)
+If you have an application that you want to get added to the `apps.json` join the Discord for Griffin and put it in the feature request channel. If you try to add it yourself, it is protected by CODEOWNERS, and I will check it out, but Discord is much faster for me to see. [GRIFFIN DISCORD](https://discord.gg/fMCpeNCxhv)
+
+If you are a developer and want to be added to the `apps.json` you will need to be sure your control files are versioned correctly with releases, otherwise false positives will loop in the updater.
 
 ## Download
 
