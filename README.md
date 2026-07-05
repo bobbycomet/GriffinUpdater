@@ -10,7 +10,7 @@ The result is meant to feel like the update experience Windows switchers already
 
 Grab the latest AppImage from the Releases page, or use this direct link:
 
-https://github.com/bobbycomet/GriffinUpdater/releases/download/v2.0.0/Griffin-Updater-x86_64.AppImage
+[DOWNLOAD](https://github.com/bobbycomet/GriffinUpdater/releases/download/v2.0.0/Griffin-Updater-x86_64.AppImage)
 
 Make it executable and run it:
 
