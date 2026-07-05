@@ -51,6 +51,16 @@
       "url": "https://github.com/bobbycomet/Process-Sentry/releases/download/v3.1.0/sentry-v3.1.0.deb",
       "version_regex": "sentry-([0-9.]+)\\.deb",
       "package_name": "sentry"
+    },
+    {
+      "id": "kernel-autotune",
+      "name": "keernel-autotune",
+      "category": "deb",
+      "source_type": "static_url",
+      "description": "Automated System Tuning",
+      "url": "https://github.com/bobbycomet/kernel-autotune-V2/releases/download/v2.3.0/kernel-autotune_2.3.0.deb",
+      "version_regex": "kernel-autotune-([0-9.]+)\\.deb",
+      "package_name": "sentry"
     }
   ]
 }
