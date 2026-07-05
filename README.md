@@ -1,5 +1,9 @@
 # Griffin Updater
 
+<div align="center">
+  <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/ca97c3aa-e5c1-4683-b6e6-0f2564842d6a" />
+</div>
+
 Griffin Updater is a desktop app that keeps your non-apt software up to date automatically. If you've switched from Windows to Linux, you're probably used to apps just checking for their own updates in the background. On Linux, that's true for anything installed through your distro's package manager, but the moment you install something as a standalone `.deb` from a vendor's website or an AppImage from GitHub, you're on your own. You either remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
 
 That second approach actually works well. It's exactly how a lot of unofficial Discord updaters function on Linux: a small script checks Discord's permanent download link, compares versions, downloads and installs if needed, and a systemd timer runs it on a schedule. Griffin Updater takes that pattern and generalizes it into a real application with a GUI, so it works for any `.deb` or AppImage, not just Discord, and so you don't need to write or maintain shell scripts yourself.
@@ -11,6 +15,10 @@ The result is meant to feel like the update experience Windows switchers already
 If you have an application that you want to get added to the `apps.json` join the Discord for Griffin and put it in the feature request channel. If you try to add it yourself, it is protected by CODEOWNERS, and I will check it out, but Discord is much faster for me to see. [GRIFFIN DISCORD](https://discord.gg/fMCpeNCxhv)
 
 If you are a developer and want to be added to the `apps.json` you will need to be sure your control files are versioned correctly with releases, otherwise false positives will loop in the updater.
+
+<img width="1920" height="1080" alt="Screenshot_20260705_183147" src="https://github.com/user-attachments/assets/907fa8c6-e56c-4a9b-aae3-b57bd4f686c8" />
+<img width="1920" height="1080" alt="Screenshot_20260705_102109" src="https://github.com/user-attachments/assets/c51b6ad1-90bc-45e2-9e7e-90b309f37226" />
+<img width="1920" height="1080" alt="Screenshot_20260705_102056" src="https://github.com/user-attachments/assets/3ca4d677-e92e-4e21-b4f9-ad71f6493292" />
 
 ## Download
 
@@ -169,3 +177,17 @@ AppImages have no OS-level source of truth for their installed version, unlike `
 `pkexec` shows a graphical auth prompt for `.deb` installs, including during scheduled, non-interactive runs. If no one is logged into the graphical session when the timer fires, that install will simply fail and get logged and retried at the next scheduled check.
 
 Static URL mode's default version regex looks for an N.N.N-style token. Some odd version schemes may need a custom regex per app, which is exactly why that field is available in Add/Edit.
+
+## Community and Support
+
+- **Discord:** [Join Here](https://discord.gg/7fEt5W7DPh)
+- **Patreon (Beta Builds):** [Patreon](https://www.patreon.com/c/BobbyComet/membership)
+- **Support the Griffin Project:** [Ko-fi](https://ko-fi.com/bobby60908)
+
+Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github.io/Griffin-Linux-Landing-Page/).
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/bobbycomet/Appify/main/Griffin-G.png" alt="Griffin Linux" width="15%"/>
+  <p><strong>Griffin Linux. Where power meets simplicity.</strong><br/>
+  Made with Windows switchers in mind. Built for everyone who wants a better PC.</p>
+</div>
