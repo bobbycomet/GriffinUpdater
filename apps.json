@@ -29,9 +29,9 @@
       "source_type": "static_url",
       "description": "Web Application Manager",
       "url": "https://github.com/bobbycomet/Appify/releases/download/v3.0.0/Appify-3.0.0-x86_64.AppImage",
-      "version_regex": "discord-([0-9.]+)\\.deb",
+      "version_regex": "appify-([0-9.]+)\\.deb",
       "package_name": "appify"
-    },  
+    },
     {
       "id": "xkm",
       "name": "XKM",
@@ -39,7 +39,7 @@
       "source_type": "static_url",
       "description": "Kernel Manager",
       "url": "https://github.com/bobbycomet/XKM-Multi-Kernel-Manager/releases/download/v2.0.1/xkm-2.0.1.deb",
-      "version_regex": "discord-([0-9.]+)\\.deb",
+      "version_regex": "XKM-([0-9.]+)\\.deb",
       "package_name": "xkm"
     },
     {
@@ -49,7 +49,7 @@
       "source_type": "static_url",
       "description": "Adaptive Process Monitoring",
       "url": "https://github.com/bobbycomet/Process-Sentry/releases/download/v3.1.0/sentry-v3.1.0.deb",
-      "version_regex": "discord-([0-9.]+)\\.deb",
+      "version_regex": "sentry-([0-9.]+)\\.deb",
       "package_name": "sentry"
     }
   ]
