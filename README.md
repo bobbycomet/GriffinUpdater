@@ -6,6 +6,10 @@ That second approach actually works well. It's exactly how a lot of unofficial D
 
 The result is meant to feel like the update experience Windows switchers already expect: add an app once, tell it how often to check, and forget about it. Everything else, the version comparison, the download, the install, the notification, and the systemd wiring, happens in the background.
 
+## Requests to be added
+
+If you have an application that you want to get added to the `apps.json` join the Disocrd for Griffin and put it in the feature request channel. If you try to add it yourself, it is protected by CODEOWNERS, and I will check it out, but Discord is much faster for me to see. [GRIFFIN DISCORD](https://discord.gg/fMCpeNCxhv)
+
 ## Download
 
 Grab the latest AppImage from the Releases page, or use this direct link:
