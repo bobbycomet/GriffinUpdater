@@ -1,1 +1,26 @@
-
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "deb",
+      "source_type": "static_url",
+      "description": "Voice, video, and text chat.",
+      "url": "https://discord.com/api/download?platform=linux&format=deb",
+      "version_regex": "discord-([0-9.]+)\\.deb",
+      "package_name": "discord"
+    },
+    {
+      "id": "opentabletdriver",
+      "name": "OpenTabletDriver",
+      "category": "deb",
+      "source_type": "github_release",
+      "description": "Open source, cross-platform tablet driver.",
+      "github_owner": "OpenTabletDriver",
+      "github_repo": "OpenTabletDriver",
+      "asset_pattern": "x64\\.deb$",
+      "package_name": "opentabletdriver"
+    }
+  ]
+}
