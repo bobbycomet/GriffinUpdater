@@ -10,7 +10,9 @@ The result is meant to feel like the update experience Windows switchers already
 
 ## Features
 - **Add any app** by pasting a download link (Static URL mode) or pointing
-  at a GitHub repo (GitHub Repo mode) — see "Two ways to track a version" below.
+  at a GitHub repo (GitHub Repo mode), see "Two ways to track a version" below.
+- **Download/Updates** if an AppImage, Deb file, or a tar.xz/zip is not installed
+  this downloads and installs it. Otherwise, it just updates it.
 - **Per-app schedule**: daily/weekly/monthly/custom, e.g., "check Discord
   weekly on Sunday at 1 PM." Each app gets its own `systemd --user`
   service + timer pair, so checks run even if the GUI isn't open.
