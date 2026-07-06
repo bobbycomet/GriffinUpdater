@@ -39,6 +39,7 @@ The result is meant to feel like the update experience Windows switchers already
 <img width="1920" height="1080" alt="Screenshot_20260705_102056" src="https://github.com/user-attachments/assets/6b804a0d-aaa2-46a0-a026-beba4a0722c6" />
 <img width="1920" height="1080" alt="Screenshot_20260705_102109" src="https://github.com/user-attachments/assets/56936955-f0a8-430e-a82d-1f2e39418a80" />
 <img width="1920" height="1080" alt="Screenshot_20260705_183147" src="https://github.com/user-attachments/assets/7a0712b9-5f0e-4534-bb24-54bc71845404" />
+<img width="502" height="739" alt="Screenshot_20260706_062654" src="https://github.com/user-attachments/assets/0668571a-2ec6-4e12-8447-df514b11e94f" />
 
 ## Requests to be added
 
