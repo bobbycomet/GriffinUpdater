@@ -1,24 +1,49 @@
-# Griffin Updater
-
 <div align="center">
-  <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/ca97c3aa-e5c1-4683-b6e6-0f2564842d6a" />
+<img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/3f4e6448-a1e9-4e0c-8e9a-256f25dfd746" />
 </div>
 
 Griffin Updater is a desktop app that keeps your non-apt software up to date automatically. If you've switched from Windows to Linux, you're probably used to apps just checking for their own updates in the background. On Linux, that's true for anything installed through your distro's package manager, but the moment you install something as a standalone `.deb` from a vendor's website or an AppImage from GitHub, you're on your own. You either remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
 
-That second approach actually works well. It's exactly how a lot of unofficial Discord updaters function on Linux: a small script checks Discord's permanent download link, compares versions, downloads and installs if needed, and a systemd timer runs it on a schedule. Griffin Updater takes that pattern and generalizes it into a real application with a GUI, so it works for any `.deb` or AppImage, not just Discord, and so you don't need to write or maintain shell scripts yourself.
+That second approach actually works well. It's exactly how a lot of unofficial Discord updaters function on Linux: a small script checks Discord's permanent download link, compares versions, downloads and installs if needed, and a systemd timer runs it on a schedule. Griffin Updater takes that pattern and generalizes it into a real application with a GUI, so it works for any `.deb`, AppImage, or plain archive, not just Discord, and so you don't need to write or maintain shell scripts yourself.
 
 The result is meant to feel like the update experience Windows switchers already expect: add an app once, tell it how often to check, and forget about it. Everything else, the version comparison, the download, the install, the notification, and the systemd wiring, happens in the background.
+
+## Features
+- **Add any app** by pasting a download link (Static URL mode) or pointing
+  at a GitHub repo (GitHub Repo mode) — see "Two ways to track a version" below.
+- **Per-app schedule**: daily/weekly/monthly/custom, e.g., "check Discord
+  weekly on Sunday at 1 PM." Each app gets its own `systemd --user`
+  service + timer pair, so checks run even if the GUI isn't open.
+- **.deb support**: compares against the installed `dpkg` version, downloads,
+  and installs via `pkexec apt-get install -y <file>` (PolicyKit prompt,
+  resolves dependencies, matches the Griffin Persona elevation model).
+- **AppImage support**: pick an install folder (defaults to `~/Desktop`),
+  optionally auto-delete the previous AppImage so only the new one remains.
+- **Archive support (zip/tar.xz)**: for apps that ship as a bare archive
+  with no package manager and no AppImage involved - Godot being the
+  motivating example. Extracts into a folder you choose (any path,
+  including a different drive/mount point), finds the real executable
+  inside automatically, and can maintain a stable-named symlink (e.g.
+  `godot`) that always points at whichever version is currently installed,
+  so shortcuts/launchers never need updating.
+- **Desktop notifications** on every completed update via `notify-send`.
+- **Shared catalog**: a single `apps.json` (meant to live in your
+  `Discordupdater` GitHub repo) that anyone running Griffin Updater can pull
+  from an **Update Catalog** button, browse, and add from, while still
+  being free to add their own untracked apps directly in the app.
+- **Griffin Dark Theme**: a Steam-like dark UI (flat panels, single accent
+  color) in Griffin's own gold-on-charcoal palette.
+
+<img width="1920" height="1080" alt="Screenshot_20260705_102056" src="https://github.com/user-attachments/assets/6b804a0d-aaa2-46a0-a026-beba4a0722c6" />
+<img width="1920" height="1080" alt="Screenshot_20260705_102109" src="https://github.com/user-attachments/assets/56936955-f0a8-430e-a82d-1f2e39418a80" />
+<img width="1920" height="1080" alt="Screenshot_20260705_183147" src="https://github.com/user-attachments/assets/7a0712b9-5f0e-4534-bb24-54bc71845404" />
 
 ## Requests to be added
 
 If you have an application that you want to get added to the `apps.json` join the Discord for Griffin and put it in the feature request channel. If you try to add it yourself, it is protected by CODEOWNERS, and I will check it out, but Discord is much faster for me to see. [GRIFFIN DISCORD](https://discord.gg/fMCpeNCxhv)
 
 If you are a developer and want to be added to the `apps.json` you will need to be sure your control files are versioned correctly with releases, otherwise false positives will loop in the updater.
-
-<img width="1920" height="1080" alt="Screenshot_20260705_183147" src="https://github.com/user-attachments/assets/907fa8c6-e56c-4a9b-aae3-b57bd4f686c8" />
-<img width="1920" height="1080" alt="Screenshot_20260705_102109" src="https://github.com/user-attachments/assets/c51b6ad1-90bc-45e2-9e7e-90b309f37226" />
-<img width="1920" height="1080" alt="Screenshot_20260705_102056" src="https://github.com/user-attachments/assets/3ca4d677-e92e-4e21-b4f9-ad71f6493292" />
+[Read the SECURITY.md](https://github.com/bobbycomet/GriffinUpdater/blob/main/SECURITY.md)
 
 ## Download
 
@@ -37,13 +62,15 @@ chmod +x Griffin-Updater-x86_64.AppImage
 
 Griffin Updater watches apps that live outside your distro's package repositories and keeps them current without you having to think about it.
 
-Add any app by pasting a download link, or by pointing it at a GitHub repo. See "Two ways to track a version" below for when to use each.
+Add any app by pasting a download link or by pointing it at a GitHub repo. See "Two ways to track a version" below for when to use each.
 
-Each app gets its own schedule, daily, weekly, monthly, or custom, like "check Discord weekly on Sunday at 1 PM." Under the hood this becomes a dedicated `systemd --user` service and timer pair, so checks run on schedule even when the GUI isn't open.
+Each app gets its own schedule, daily, weekly, monthly, or custom, like "check Discord weekly on Sunday at 1 PM." Under the hood, this becomes a dedicated `systemd --user` service and timer pair, so checks run on schedule even when the GUI isn't open.
 
-`.deb` apps are checked against the version already installed via `dpkg`, then downloaded and installed with `pkexec apt-get install -y <file>`, which prompts for authorization the same way Griffin Persona does, and resolves dependencies normally.
+`.deb` apps are checked against the version already installed via `dpkg`, then downloaded and installed with `pkexec apt-get install -y `, which prompts for authorization the same way Griffin Persona does, and resolves dependencies normally.
 
 AppImages are downloaded into a folder you choose, defaulting to `~/Desktop`, with the option to automatically delete the previous version so old copies don't pile up.
+
+Archives (zip/tar.xz) are handled the same way for apps with no package manager and no AppImage involved; see Features above.
 
 You get a desktop notification through `notify-send` whenever an update finishes.
 
@@ -100,7 +127,7 @@ One thing worth knowing: PyInstaller will warn, not fail, if `libxcb-cursor0` an
 
 Discord's download link, `https://discord.com/api/download?platform=linux&format=deb`, is a permanent endpoint. It always redirects to whatever the current build is, and the version shows up in the resulting filename. That's Static URL mode: Griffin Updater follows the redirect and pulls the version out of the final URL with a regex.
 
-OpenTabletDriver's asset works differently. GitHub's `releases/latest/download/<filename>` pattern only works if `<filename>` stays identical release to release, but OpenTabletDriver's filename embeds the version, like `opentabletdriver_0.6.7-1_x64.deb`, so a link like that goes stale the moment `0.6.8` ships. GitHub Repo mode avoids this: you give it an owner and repo, `OpenTabletDriver` / `OpenTabletDriver`, and an asset-name regex, `x64\.deb$`, and it asks the GitHub Releases API for whatever the actual latest asset is, every time. Reach for this mode whenever a project's filenames change per release.
+OpenTabletDriver's asset works differently. GitHub's `releases/latest/download/` pattern only works if `` stays identical release to release, but OpenTabletDriver's filename embeds the version, like `opentabletdriver_0.6.7-1_x64.deb`, so a link like that goes stale the moment `0.6.8` ships. GitHub Repo mode avoids this: you give it an owner and repo, `OpenTabletDriver` / `OpenTabletDriver`, and an asset-name regex, `x64\.deb`, and it asks the GitHub Releases API for whatever the actual latest asset is, every time. Reach for this mode whenever a project's filenames change per release.
 
 You can switch an app between modes, or edit its URL, owner, repo, or pattern, at any time from Edit.
 
@@ -137,7 +164,7 @@ Push a file shaped like this to your `Discordupdater` repo. A starter copy with 
 }
 ```
 
-Here's what each field means. `id` is a unique slug for the app, required on every entry. `name` is the display name shown in the catalog browser. `category` is either `deb` or `appimage`. `source_type` is either `static_url` or `github_release`. `description` shows up in the catalog browser. `url` applies to static_url entries and is the always-current download link. `version_regex` also applies to static_url entries; it's optional and defaults to extracting an N.N.N-style token. `github_owner` and `github_repo` apply to github_release entries and specify which repo to query. `asset_pattern` applies to github_release entries and is a regex matched against release asset filenames. `package_name` applies to deb entries and defaults to `id` if left out. **Do not use spaces in the names; use a dash "-" or em dash "—".**
+Here's what each field means. `id` is a unique slug for the app, required on every entry. `name` is the display name shown in the catalog browser. `category` is `deb`, `appimage`, or `archive`. `source_type` is either `static_url` or `github_release`. `description` shows up in the catalog browser. `url` applies to static_url entries and is the always-current download link. `version_regex` also applies to static_url entries; it's optional and defaults to extracting an N.N.N-style token. `github_owner` and `github_repo` apply to github_release entries and specify which repo to query. `asset_pattern` applies to github_release entries and is a regex matched against release asset filenames. `package_name` applies to deb entries and defaults to `id` if left out. Do not use spaces in the names; use a dash "-" or em dash "—".
 
 Local-only fields like schedule, install location, and enabled or notify toggles aren't part of the catalog. Those get filled in by whoever adds the app, since they're personal preferences rather than facts about the app itself.
 
@@ -150,11 +177,11 @@ Clicking Add on a catalog row opens the normal Add/Edit dialog pre-filled, so yo
 Each enabled app gets its own pair of unit files:
 
 ```
-~/.config/systemd/user/griffin-updater-<id>.service
-~/.config/systemd/user/griffin-updater-<id>.timer
+~/.config/systemd/user/griffin-updater-.service
+~/.config/systemd/user/griffin-updater-.timer
 ```
 
-The service just runs `python -m griffin_updater.cli check --id <id>`. The timer's `OnCalendar=` value is generated from your schedule choice, so "weekly, Sunday, 13:00" becomes `OnCalendar=Sun *-*-* 13:00:00`. `systemctl --user enable --now` is called automatically whenever you save an app, so nothing extra needs to be run by hand.
+The service just runs `python -m griffin_updater.cli check --id `. The timer's `OnCalendar=` value is generated from your schedule choice, so "weekly, Sunday, 13:00" becomes `OnCalendar=Sun *-*-* 13:00:00`. `systemctl --user enable --now` is called automatically whenever you save an app, so nothing extra needs to be run by hand.
 
 Because these are user units rather than root or system units like the original Discord updater script relied on, they inherit your desktop session's D-Bus address automatically. That means `notify-send` just works, with no sudo-per-logged-in-user loop needed like the original script had to do.
 
@@ -172,7 +199,7 @@ griffin-updater-cli install-timers           # regenerate all systemd units from
 
 ## Known limitations
 
-AppImages have no OS-level source of truth for their installed version, unlike `dpkg`, so that state is tracked in `~/.local/share/griffin-updater/state.json`. If that file is deleted, the next check will treat the app as a fresh install.
+AppImages have no OS-level source of truth for their installed version, unlike `dpkg`, so that state is tracked in `~/.local/share/griffin-updater/state.json`. Archive-based apps are tracked the same way, since they have no package-manager record either. If that file is deleted, the next check will treat the app as a fresh install.
 
 `pkexec` shows a graphical auth prompt for `.deb` installs, including during scheduled, non-interactive runs. If no one is logged into the graphical session when the timer fires, that install will simply fail and get logged and retried at the next scheduled check.
 
@@ -180,9 +207,9 @@ Static URL mode's default version regex looks for an N.N.N-style token. Some odd
 
 ## Community and Support
 
-- **Discord:** [Join Here](https://discord.gg/7fEt5W7DPh)
-- **Patreon (Beta Builds):** [Patreon](https://www.patreon.com/c/BobbyComet/membership)
-- **Support the Griffin Project:** [Ko-fi](https://ko-fi.com/bobby60908)
+- Discord: [Join Here](https://discord.gg/7fEt5W7DPh)
+- Patreon (Beta Builds): [Patreon](https://www.patreon.com/c/BobbyComet/membership)
+- Support the Griffin Project: [Ko-fi](https://ko-fi.com/bobby60908)
 
 Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github.io/Griffin-Linux-Landing-Page/).
 
