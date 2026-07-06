@@ -89,7 +89,7 @@
       "github_repo": "godot",
       "asset_pattern": "Godot_v[0-9.]+-stable_mono_linux_x86_64\\.zip$",
       "archive_subdir_name": "Godot-Mono",
-      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux\.x86_64$",
+      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux\\.x86_64$",
       "archive_symlink_name": "godot-mono"
     }
   ]
