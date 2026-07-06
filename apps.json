@@ -102,7 +102,7 @@
       "github_repo": "Fan-Hub",
       "asset_pattern": "FanHub.*\\.AppImage$",
       "package_name": "FanHub"
-    }
+    },
     {
       "id": "grix",
       "name": "Grix",
