@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "deb",
+      "source_type": "static_url",
+      "description": "Voice, video, and text chat.",
+      "url": "https://discord.com/api/download?platform=linux&format=deb",
+      "version_regex": "discord-([0-9.]+)\\.deb",
+      "package_name": "discord"
+    },
+    {
+      "id": "opentabletdriver",
+      "name": "OpenTabletDriver",
+      "category": "deb",
+      "source_type": "github_release",
+      "description": "Open source, cross-platform tablet driver.",
+      "github_owner": "OpenTabletDriver",
+      "github_repo": "OpenTabletDriver",
+      "asset_pattern": "x64\\.deb$",
+      "package_name": "opentabletdriver"
+    },
+    {
+      "id": "godot-standard",
+      "name": "Godot (Standard)",
+      "category": "archive",
+      "source_type": "github_release",
+      "description": "2D/3D game engine - standard build, no C# support.",
+      "github_owner": "godotengine",
+      "github_repo": "godot",
+      "asset_pattern": "Godot_v[0-9.]+-stable_linux\\.x86_64\\.zip$",
+      "archive_subdir_name": "Godot",
+      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_linux\\.x86_64$",
+      "archive_symlink_name": "godot"
+    },
+    {
+      "id": "godot-mono",
+      "name": "Godot (.NET/Mono)",
+      "category": "archive",
+      "source_type": "github_release",
+      "description": "2D/3D game engine - .NET build with C# support.",
+      "github_owner": "godotengine",
+      "github_repo": "godot",
+      "asset_pattern": "Godot_v[0-9.]+-stable_mono_linux_x86_64\\.zip$",
+      "archive_subdir_name": "Godot-Mono",
+      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux\\.x86_64$",
+      "archive_symlink_name": "godot-mono"
+    }
+  ]
+}
