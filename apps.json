@@ -91,6 +91,28 @@
       "archive_subdir_name": "Godot-Mono",
       "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux\\.x86_64$",
       "archive_symlink_name": "godot-mono"
+    },
+    {
+      "id": "fan-hub",
+      "name": "Fan Hub",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "GUI Fan and RGB control",
+      "github_owner": "bobbycomet",
+      "github_repo": "Fan-Hub",
+      "asset_pattern": "FanHub.*\\.AppImage$",
+      "package_name": "FanHub"
+    }
+    {
+      "id": "grix",
+      "name": "Grix",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Linux Troubleshooter in a GUI",
+      "github_owner": "bobbycomet",
+      "github_repo": "Grix",
+      "asset_pattern": "Grix.*\\.AppImage$",
+      "package_name": "Grix"
     }
   ]
 }
