@@ -65,6 +65,32 @@
       "github_repo": "kernel-autotune-V2",
       "asset_pattern": "kernel-autotune.*\\.deb$",
       "package_name": "kernel-autotune"
+    },
+    {
+      "id": "godot-standard",
+      "name": "Godot (Standard)",
+      "category": "archive",
+      "source_type": "github_release",
+      "description": "2D/3D game engine - standard build, no C# support.",
+      "github_owner": "godotengine",
+      "github_repo": "godot",
+      "asset_pattern": "Godot_v[0-9.]+-stable_linux\\.x86_64\\.zip$",
+      "archive_subdir_name": "Godot",
+      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_linux\\.x86_64$",
+      "archive_symlink_name": "godot"
+    },
+    {
+      "id": "godot-mono",
+      "name": "Godot (.NET/Mono)",
+      "category": "archive",
+      "source_type": "github_release",
+      "description": "2D/3D game engine - .NET build with C# support.",
+      "github_owner": "godotengine",
+      "github_repo": "godot",
+      "asset_pattern": "Godot_v[0-9.]+-stable_mono_linux_x86_64\\.zip$",
+      "archive_subdir_name": "Godot-Mono",
+      "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux_x86_64$",
+      "archive_symlink_name": "godot-mono"
     }
   ]
 }
