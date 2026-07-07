@@ -64,7 +64,7 @@ If you are a developer and want to be added to the `apps.json` you will need to 
 
 Grab the latest AppImage from the Releases page, or use this direct link:
 
-[DOWNLOAD](https://github.com/bobbycomet/GriffinUpdater/releases/download/v2.0.0/Griffin-Updater-x86_64.AppImage)
+[DOWNLOAD](https://github.com/bobbycomet/GriffinUpdater/releases/download/v2.0.4/Griffin-Updater-x86_64.AppImage)
 
 Make it executable and run it:
 
