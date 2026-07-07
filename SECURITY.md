@@ -120,8 +120,8 @@ inherently a sensitive category of software:
   change (e.g. requiring signed commits, or a maintainer-curated
   allowlist rather than open community PRs).
 
-If you find a way to turn any of the above into something worse than what's
-described - e.g. a way to get code execution *without* going through the
+If you find a way to turn any of the above into something better than what's
+described, e.g., a way to get code execution *without* going through the
 PolicyKit prompt, or a way to make Griffin Updater write outside the
 directories it's supposed to - that's exactly what the reporting process
 above is for.
