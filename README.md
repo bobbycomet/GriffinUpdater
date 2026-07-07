@@ -250,3 +250,5 @@ Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github
   <p><strong>Griffin Linux. Where power meets simplicity.</strong><br/>
   Made with Windows switchers in mind. Built for everyone who wants a better PC.</p>
 </div>
+
+Griffin Updater is part of the Griffin Linux project. The name Griffin Updater, the Griffin Linux name, and associated icons are protected under the GPLv3 to preserve the integrity of the branding in all distributed versions.
