@@ -2,6 +2,8 @@
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/3f4e6448-a1e9-4e0c-8e9a-256f25dfd746" />
 </div>
 
+# The official Updater for Griffin's ecosystem
+
 Griffin Updater is a desktop app that keeps your non-apt software up to date automatically. If you've switched from Windows to Linux, you're probably used to apps just checking for their own updates in the background. On Linux, that's true for anything installed through your distro's package manager, but the moment you install something as a standalone `.deb` from a vendor's website or an AppImage from GitHub, you're on your own. You either remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
 
 That second approach actually works well. It's exactly how a lot of unofficial Discord updaters function on Linux: a small script checks Discord's permanent download link, compares versions, downloads and installs if needed, and a systemd timer runs it on a schedule. Griffin Updater takes that pattern and generalizes it into a real application with a GUI, so it works for any `.deb`, AppImage, or plain archive, not just Discord, and so you don't need to write or maintain shell scripts yourself.
@@ -11,7 +13,7 @@ The result is meant to feel like the update experience Windows switchers already
 ## Features
 - **Add any app** by pasting a download link (Static URL mode) or pointing
   at a GitHub repo (GitHub Repo mode) — see "Two ways to track a version" below.
-- **Per-app schedule**: daily / weekly / monthly / custom, e.g. "check Discord
+- **Per-app schedule**: daily/weekly/monthly/custom, e.g., "check Discord
   weekly on Sunday at 1 PM." Each app gets its own `systemd --user`
   service + timer pair, so checks run even if the GUI isn't open.
 - **.deb support**: compares against the installed `dpkg` version, downloads,
@@ -19,13 +21,13 @@ The result is meant to feel like the update experience Windows switchers already
   resolves dependencies, matches the Griffin Persona elevation model).
 - **AppImage support**: pick an install folder (defaults to `~/Desktop`),
   optionally auto-delete the previous AppImage so only the new one remains.
-- **Archive support (zip / tar.xz)**: for apps that ship as a bare archive
+- **Archive support (zip/tar.xz)**: for apps that ship as a bare archive
   with no package manager and no AppImage involved - Godot being the
   motivating example. Extracts into a folder you choose (any path,
   including a different drive/mount point), and can maintain a
-  stable-named symlink (e.g. `godot`) that always points at whichever
+  stable-named symlink (e.g., `godot`) that always points at whichever
   version is currently installed, so shortcuts/launchers never need
-  updating. For a single-file archive it can usually spot the executable
+  updating. For a single-file archive, it can usually spot the executable
   on its own; anything with more than one file inside, like Godot's .NET
   build, needs you to set an executable pattern once in Add/Edit.
 - **Notify-first consent for unattended `.deb` installs**: when a
@@ -230,13 +232,6 @@ AppImages have no OS-level source of truth for their installed version, unlike `
 
 Static URL mode's default version regex looks for an N.N.N-style token. Some odd version schemes may need a custom regex per app, which is exactly why that field is available in Add/Edit.
 
-## Community and Support
-
-- Discord: [Join Here](https://discord.gg/7fEt5W7DPh)
-- Patreon (Beta Builds): [Patreon](https://www.patreon.com/c/BobbyComet/membership)
-- Support the Griffin Project: [Ko-fi](https://ko-fi.com/bobby60908)
-
-Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github.io/Griffin-Linux-Landing-Page/).
 ## Community and Support
 
 - Discord: [Join Here](https://discord.gg/7fEt5W7DPh)
