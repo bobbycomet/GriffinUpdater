@@ -113,6 +113,16 @@
       "github_repo": "Grix",
       "asset_pattern": "Grix.*\\.AppImage$",
       "package_name": "Grix"
+    },
+    {
+      "id": "griffin-hub",
+      "name": "Griffin-Hub",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "System tuning, Steam settings, Driver handling",
+      "github_owner": "bobbycomet",
+      "github_repo": "Griffin-Hub",
+      "asset_pattern": "GriffinHub.*\\.AppImage$"
     }
   ]
 }
