@@ -237,7 +237,7 @@ Griffin Updater is licensed under the GPLv3, and forks and derivative projects a
 If you build on Griffin Updater, please:
 
 - Keep the GPLv3 license terms intact.
-- Give appropriate credit to the original Geiffin Updater project.
+- Give appropriate credit to the original Griffin Updater project.
 - Include a link back to this repository where practical.
 
 If you're building something cool with it, I'd love to hear about it!
