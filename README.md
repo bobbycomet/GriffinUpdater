@@ -232,13 +232,21 @@ AppImages have no OS-level source of truth for their installed version, unlike `
 
 Static URL mode's default version regex looks for an N.N.N-style token. Some odd version schemes may need a custom regex per app, which is exactly why that field is available in Add/Edit.
 
+Griffin Updater is licensed under the GPLv3, and forks and derivative projects are welcome.
+
+If you build on Griffin Updater, please:
+
+- Keep the GPLv3 license terms intact.
+- Give appropriate credit to the original Geiffin Updater project.
+- Include a link back to this repository where practical.
+
+If you're building something cool with it, I'd love to hear about it!
+
 ## Community and Support
 
-- Discord: [Join Here](https://discord.gg/7fEt5W7DPh)
-- Patreon (Beta Builds): [Patreon](https://www.patreon.com/c/BobbyComet/membership)
-- Support the Griffin Project: [Ko-fi](https://ko-fi.com/bobby60908)
-
-Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github.io/Griffin-Linux-Landing-Page/).
+- **Discord:** [Join Here](https://discord.gg/7fEt5W7DPh)
+- **Patreon (Beta Builds):** [Patreon](https://www.patreon.com/c/BobbyComet/membership)
+- **Support the Griffin Project:** [Ko-fi](https://ko-fi.com/bobby60908)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/bobbycomet/Appify/main/Griffin-G.png" alt="Griffin Linux" width="15%"/>
@@ -246,4 +254,6 @@ Griffin Updater is part of the [Griffin Linux project](https://bobbycomet.github
   Made with Windows switchers in mind. Built for everyone who wants a better PC.</p>
 </div>
 
-Griffin Updater is part of the Griffin Linux project. The name Griffin Updater, the Griffin Linux name, and associated icons are protected under the GPLv3 to preserve the integrity of the branding in all distributed versions.
+The Griffin Updater and Griffin Linux names, logos, and branding are not covered by the GPL license and may not be used to imply endorsement 
+or official affiliation without permission. Forks are encouraged, but please rename and rebrand modified versions unless you've 
+received permission to use the original branding.
