@@ -105,6 +105,70 @@
           "asset_pattern": "^FanHub-[0-9.]+-x86_64\\.AppImage$"
         }
       ]
+    },
+    {
+      "id": "xkm",
+      "name": "XKM",
+      "description": "Multi kernel manager for Linux.",
+      "category": "deb",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "XKM-Multi-Kernel-Manager",
+      "asset_pattern": "^XKM\\.deb$",
+      "package_name": "xkm-multi-kernel-manager"
+    },
+    {
+      "id": "griffin-persona",
+      "name": "Griffin Persona",
+      "description": "Post-install tool that helps users install apps based on workflows.",
+      "category": "deb",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "GriffinPersona",
+      "asset_pattern": "^griffin-persona\\.deb$",
+      "package_name": "griffin-persona"
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "description": "Adaptive process monitoring for Linux.",
+      "category": "deb",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "Process-Sentry",
+      "asset_pattern": "^sentry_[0-9.]+\\.deb$",
+      "package_name": "process-sentry"
+    },
+    {
+      "id": "griffin-hub",
+      "name": "Griffin-Hub",
+      "description": "One GUI for process/resource management, kernel tuning, and hardware troubleshooting",
+      "category": "appimage",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "Griffin-Hub",
+      "asset_pattern": "^GriffinHub-[0-9.]+-x86_64\\.AppImage$"
+    },
+    {
+      "id": "kernel-autotune",
+      "name": "Kernel Autotune",
+      "description": "Tunes kernel parameters for your system.",
+      "category": "deb",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "kernel-autotune-V2",
+      "asset_pattern": "^kernel-autotune_[0-9.]+\\.deb$",
+      "package_name": "kernel-autotune"
+    },
+    {
+      "id": "grix",
+      "name": "Grix",
+      "description": "Linux system diagnostic and maintenance tool and plain-English kernel error explanations.",
+      "category": "appimage",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "Grix",
+      "asset_pattern": "^Grix-x86_64\\.AppImage$"
     }
   ]
 }
