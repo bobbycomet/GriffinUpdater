@@ -23,50 +23,6 @@
       "package_name": "opentabletdriver"
     },
     {
-      "id": "appify",
-      "name": "Appify",
-      "category": "appimage",
-      "source_type": "github_release",
-      "description": "Web Application Manager",
-      "github_owner": "bobbycomet",
-      "github_repo": "Appify",
-      "asset_pattern": "Appify.*\\.AppImage$",
-      "package_name": "appify"
-    },
-    {
-      "id": "xkm",
-      "name": "XKM",
-      "category": "deb",
-      "source_type": "github_release",
-      "description": "Kernel Manager",
-      "github_owner": "bobbycomet",
-      "github_repo": "XKM-Multi-Kernel-Manager",
-      "asset_pattern": "xkm.*\\.deb$",
-      "package_name": "xkm-multi-kernel-manager"
-    },
-    {
-      "id": "sentry",
-      "name": "Sentry",
-      "category": "deb",
-      "source_type": "github_release",
-      "description": "Adaptive Process Monitoring",
-      "github_owner": "bobbycomet",
-      "github_repo": "Process-Sentry",
-      "asset_pattern": "sentry.*\\.deb$",
-      "package_name": "process-sentry"
-    },
-    {
-      "id": "kernel-autotune",
-      "name": "Kernel Autotune",
-      "category": "deb",
-      "source_type": "github_release",
-      "description": "Automatic kernel/hardware performance tuning.",
-      "github_owner": "bobbycomet",
-      "github_repo": "kernel-autotune-V2",
-      "asset_pattern": "kernel-autotune.*\\.deb$",
-      "package_name": "kernel-autotune"
-    },
-    {
       "id": "godot-standard",
       "name": "Godot (Standard)",
       "category": "archive",
@@ -93,36 +49,62 @@
       "archive_symlink_name": "godot-mono"
     },
     {
+      "id": "openrgb",
+      "name": "OpenRGB",
+      "description": "Open source RGB lighting control that doesn't depend on manufacturer software.",
+      "source_type": "gitea_release",
+      "gitea_host": "codeberg.org",
+      "gitea_owner": "OpenRGB",
+      "gitea_repo": "OpenRGB",
+      "variants": [
+        {
+          "category": "deb",
+          "asset_pattern": "^openrgb_.*_amd64_bookworm_[0-9a-f]+\\.deb$",
+          "package_name": "openrgb"
+        },
+        {
+          "category": "appimage",
+          "asset_pattern": "^OpenRGB_.*_x86_64_[0-9a-f]+\\.AppImage$"
+        }
+      ]
+    },
+    {
+      "id": "appify",
+      "name": "Appify",
+      "description": "Turn websites into native-feeling PWAs on Linux using your existing browser engines.",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "Appify",
+      "variants": [
+        {
+          "category": "deb",
+          "asset_pattern": "^appify-[0-9.]+-[0-9]+\\.deb$",
+          "package_name": "appify"
+        },
+        {
+          "category": "appimage",
+          "asset_pattern": "^Appify-x86_64\\.AppImage$"
+        }
+      ]
+    },
+    {
       "id": "fan-hub",
       "name": "Fan Hub",
-      "category": "appimage",
+      "description": "GUI fan and RGB control.",
       "source_type": "github_release",
-      "description": "GUI Fan and RGB control",
       "github_owner": "bobbycomet",
       "github_repo": "Fan-Hub",
-      "asset_pattern": "FanHub.*\\.AppImage$",
-      "package_name": "FanHub"
-    },
-    {
-      "id": "grix",
-      "name": "Grix",
-      "category": "appimage",
-      "source_type": "github_release",
-      "description": "Linux Troubleshooter in a GUI",
-      "github_owner": "bobbycomet",
-      "github_repo": "Grix",
-      "asset_pattern": "Grix.*\\.AppImage$",
-      "package_name": "Grix"
-    },
-    {
-      "id": "griffin-hub",
-      "name": "Griffin-Hub",
-      "category": "appimage",
-      "source_type": "github_release",
-      "description": "System tuning, Steam settings, Driver handling",
-      "github_owner": "bobbycomet",
-      "github_repo": "Griffin-Hub",
-      "asset_pattern": "GriffinHub.*\\.AppImage$"
+      "variants": [
+        {
+          "category": "deb",
+          "asset_pattern": "^fanhub_[0-9.]+_amd64\\.deb$",
+          "package_name": "fanhub"
+        },
+        {
+          "category": "appimage",
+          "asset_pattern": "^FanHub-[0-9.]+-x86_64\\.AppImage$"
+        }
+      ]
     }
   ]
 }
