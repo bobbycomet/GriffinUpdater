@@ -2,11 +2,6 @@
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/3f4e6448-a1e9-4e0c-8e9a-256f25dfd746" />
 </div>
 
-**Version 2.0.6** is being worked on. Some bug fixes, adding Codeberg detection (similar to how GitHub works in the apps.json), and adding when there are two of the same tool
-but one is `appimage` and the other is a `.deb`; it will detect this and offer to download/update one or the other version. 
-
-Why not 2.1? This is not a big enough update for the update to jump that much; it has the same features, just a new API added.
-
 # The official Updater for Griffin's ecosystem
 
 Griffin Updater is a desktop app that keeps your non-apt software up to date automatically. If you've switched from Windows to Linux, you're probably used to apps just checking for their own updates in the background. On Linux, that's true for anything installed through your distro's package manager, but the moment you install something as a standalone `.deb` from a vendor's website or an AppImage from GitHub, you're on your own. You either remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
