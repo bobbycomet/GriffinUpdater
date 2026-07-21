@@ -1,4 +1,4 @@
-# Griffin Updater
+# Griffin Updater — Install and keep third-party Linux apps updated
 
 ## Why this exists
 
@@ -10,6 +10,7 @@ That second approach actually works; it's how a lot of unofficial Discord update
 
 ## What you get
 
+- **Install** — Clicking **Check now** will install anything you choose; no need to find and download it if it is in the `apps.json`; it is also a manual way to update
 - **Track anything** — paste a direct download link, or point it at a GitHub or Codeberg/Gitea repo
 - **Real schedules, not just a GUI timer** — each app gets its own `systemd --user` timer, so checks still run when the app isn't open
 - **`.deb`, AppImage, and archive support** — including apps like Godot that ship as a bare zip/tar.xz with no package manager involved
