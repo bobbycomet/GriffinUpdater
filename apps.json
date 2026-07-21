@@ -169,6 +169,25 @@
       "github_owner": "bobbycomet",
       "github_repo": "Grix",
       "asset_pattern": "^Grix-x86_64\\.AppImage$"
+    },
+    {
+      "id": "heroic",
+      "name": "Heroic Games Launcher",
+      "description": "Open source launcher for Epic Games, GOG, and Amazon games on Linux.",
+      "source_type": "github_release",
+      "github_owner": "Heroic-Games-Launcher",
+      "github_repo": "HeroicGamesLauncher",
+      "variants": [
+        {
+          "category": "deb",
+          "asset_pattern": "^Heroic-[0-9.]+-linux-amd64\\.deb$",
+          "package_name": "heroic-games-launcher"
+        },
+        {
+          "category": "appimage",
+          "asset_pattern": "^Heroic-[0-9.]+-linux-x86_64\\.AppImage$"
+        }
+      ]
     }
   ]
 }
