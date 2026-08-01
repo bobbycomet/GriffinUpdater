@@ -171,6 +171,16 @@
       "asset_pattern": "^Grix-x86_64\\.AppImage$"
     },
     {
+      "id": "conky-studio",
+      "name": "Conky Studio",
+      "description": "Visual node editor for creating Conky + Lua/Cairo HUD themes.",
+      "category": "appimage",
+      "source_type": "github_release",
+      "github_owner": "bobbycomet",
+      "github_repo": "Conky-Studio",
+      "asset_pattern": "^Conky-Studio-[0-9.]+_x86_64\\.AppImage$"
+    },
+    {
       "id": "heroic",
       "name": "Heroic Games Launcher",
       "description": "Open source launcher for Epic Games, GOG, and Amazon games on Linux.",
