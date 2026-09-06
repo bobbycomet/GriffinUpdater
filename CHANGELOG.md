@@ -1,5 +1,7 @@
 # Changelog
 
+## Added Kalium to the apps catalog, no version change needed.
+
 ## v2.1.0
 
 ### Fixed
