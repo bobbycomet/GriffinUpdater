@@ -196,7 +196,7 @@
         {
           "category": "appimage",
           "asset_pattern": "^Heroic-[0-9.]+-linux-x86_64\\.AppImage$"
-        }
+        },
         {
           "id": "kalium",
           "name": "Kalium",
