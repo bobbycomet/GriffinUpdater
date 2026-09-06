@@ -197,6 +197,16 @@
           "category": "appimage",
           "asset_pattern": "^Heroic-[0-9.]+-linux-x86_64\\.AppImage$"
         }
+        {
+          "id": "kalium",
+          "name": "Kalium",
+          "description": "Linux modding helper for Steam and Mod Organizer 2 (MO2). Builds MO2 environments, handles NXM links, prefixes, plugins, and Game version backpatching.",
+          "category": "appimage",
+          "source_type": "github_release",
+          "github_owner": "bobbycomet",
+          "github_repo": "Kalium",
+          "asset_pattern": "^Kalium-[0-9.]+-x86_64\\.AppImage$"
+        }
       ]
     }
   ]
