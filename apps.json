@@ -178,7 +178,7 @@
       "source_type": "github_release",
       "github_owner": "bobbycomet",
       "github_repo": "Conky-Studio",
-      "asset_pattern": "^Conky-Studio-[0-9.]+_x86_64\\.AppImage$"
+      "asset_pattern": "^Conky-Studio-[0-9.]+-x86_64\\.AppImage$"
     },
     {
       "id": "heroic",
