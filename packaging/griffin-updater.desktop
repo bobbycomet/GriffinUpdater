@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Griffin Updater
+Comment=Schedule-based updater for .deb and AppImage apps
+Exec=griffin-updater
+Icon=griffin-updater
+Terminal=false
+Categories=System;PackageManager;Utility;
+StartupNotify=true
