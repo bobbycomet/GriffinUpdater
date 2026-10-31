@@ -1,5 +1,8 @@
 # Griffin Updater — Install and keep third-party Linux apps updated
 
+<img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/6dba7f6e-859d-4feb-8d3b-bdc01e26d5f1" />
+
+
 ## Why this exists
 
 If you've moved from Windows to Linux, you're used to apps quietly checking for their own updates. On Linux, that's true for anything installed through your distro's package manager, but the moment you grab a standalone `.deb` from a vendor's site or an AppImage from GitHub, you're on your own. Either you remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
@@ -29,7 +32,7 @@ Version 2.0 was the original core idea: scheduled `.deb`/AppImage updates via sy
 
 2.1 is the same app grown up. It's not one feature; it's everything that landed on top of that core since:
 
-| | 2.0 | 2.1 |
+| | 2.0 | 2.1+ |
 |---|---|---|
 | Sources | GitHub releases only | GitHub **and** Codeberg/self-hosted Gitea |
 | App types | `.deb`, AppImage | `.deb`, AppImage, **and plain archives** |
@@ -42,6 +45,8 @@ Version 2.0 was the original core idea: scheduled `.deb`/AppImage updates via sy
 | Maintenance | Manual timer fixes | **Regenerate Timers** repairs or rebuilds every app's systemd units in one click |
 
 If you're on 2.0, none of your setup breaks moving to 2.1; it's additive the whole way.
+
+2.2.x introduces Service file separation from the GUI. Before, you used to have to have the tray icon always open to get updates. Now, the timers and service files work without the tray needing to be open. 
 
 ## Two ways to track a version
 
