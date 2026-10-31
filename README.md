@@ -1,7 +1,8 @@
 # Griffin Updater — Install and keep third-party Linux apps updated
 
+<p align="center">
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/6dba7f6e-859d-4feb-8d3b-bdc01e26d5f1" />
-
+</p>
 
 ## Why this exists
 
