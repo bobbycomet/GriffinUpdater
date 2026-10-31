@@ -1,9 +1,0 @@
-#!/bin/bash
-# Entry point systemd/AppImage runtime calls when the .AppImage is executed.
-HERE="$(dirname "$(readlink -f "${0}")")"
-export PATH="${HERE}/usr/bin:${PATH}"
-export LD_LIBRARY_PATH="${HERE}/usr/bin:${HERE}/usr/lib:${LD_LIBRARY_PATH}"
-# Let Qt find its own bundled plugins (PyInstaller collects these under
-# usr/bin/PyQt6/Qt6/plugins alongside the binary).
-export QT_PLUGIN_PATH="${HERE}/usr/bin/PyQt6/Qt6/plugins:${QT_PLUGIN_PATH}"
-exec "${HERE}/usr/bin/griffin-updater" "$@"
