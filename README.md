@@ -4,6 +4,8 @@
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/6dba7f6e-859d-4feb-8d3b-bdc01e26d5f1" />
 </p>
 
+> **NOTE:** If the update path in the apps.json updates, you will have to remove the application, update catalog, update the script. I will work on fixing that in the next update to be easier, and notify when a regex or anything else like a link changes, and needs to update in the app.
+
 ## Why this exists
 
 If you've moved from Windows to Linux, you're used to apps quietly checking for their own updates. On Linux, that's true for anything installed through your distro's package manager, but the moment you grab a standalone `.deb` from a vendor's site or an AppImage from GitHub, you're on your own. Either you remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
