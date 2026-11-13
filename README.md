@@ -4,7 +4,7 @@
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/6dba7f6e-859d-4feb-8d3b-bdc01e26d5f1" />
 </p>
 
-> **NOTE:** If the update path in the apps.json updates, you will have to remove the application from the list (do not remove the app image or uninstall the app), update catalog, update the script. I will work on fixing that in the next update to be easier, and notify when a regex or anything else like a link changes, and needs to update in the app.
+> **NOTE:** If the update path in the apps.json updates, you will have to remove the application from the list (do not remove the appimage or uninstall the app), update catalog, update the script. I will work on fixing that in the next update to be easier, and notify when a regex or anything else like a link changes, and needs to update in the app.
 
 ## Why this exists
 
