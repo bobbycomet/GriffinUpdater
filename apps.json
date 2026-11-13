@@ -8,7 +8,7 @@
       "source_type": "static_url",
       "description": "Voice, video, and text chat.",
       "url": "https://discord.com/api/download?platform=linux&format=deb",
-      "version_regex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+      "version_regex": "/([0-9.]+)/Discord\\.deb",
       "package_name": "discord"
     },
     {
