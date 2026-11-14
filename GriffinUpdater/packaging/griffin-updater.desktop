@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Griffin Updater
+GenericName=Application Updater
+Comment=Keep .deb, AppImage and archive-based apps up to date on a schedule
+Exec=griffin-updater
+Icon=griffin-updater
+Terminal=false
+Categories=System;Utility;
+Keywords=update;updater;appimage;deb;github;
+StartupWMClass=griffin-updater
