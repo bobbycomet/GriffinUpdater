@@ -4,11 +4,10 @@
 <img width="300" height="300" alt="griffin-updater" src="https://github.com/user-attachments/assets/6dba7f6e-859d-4feb-8d3b-bdc01e26d5f1" />
 </p>
 
-> **NOTE:** If the update path in the apps.json updates, you will have to remove the application from the list (do not remove the appimage or uninstall the app), update catalog, update the script. I will work on fixing that in the next update to be easier, and notify when a regex or anything else like a link changes, and needs to update in the app.
 
 ## Why this exists
 
-If you've moved from Windows to Linux, you're used to apps quietly checking for their own updates. On Linux, that's true for anything installed through your distro's package manager, but the moment you grab a standalone `.deb` from a vendor's site or an AppImage from GitHub, you're on your own. Either you remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand.
+If you've moved from Windows to Linux, you're used to apps quietly checking for their own updates. On Linux, that's true for anything installed through your distro's package manager, but the moment you grab a standalone `.deb` from a vendor's site or an AppImage from GitHub, you're on your own. Either you remember to go check for a new version yourself, or you write a one-off script and wire it into a systemd timer by hand. Griffin Updater can even download applications. It updates everything that is listed, but it will also download if it is not on your system.
 
 That second approach actually works; it's how a lot of unofficial Discord updaters function on Linux: a script checks a permanent download link, compares versions, installs if needed, and a timer runs it on a schedule. Griffin Updater takes that pattern and turns it into a real application: a GUI that works for *any* `.deb`, AppImage, or archive, not just Discord, so you never have to write or maintain a shell script yourself.
 
@@ -50,6 +49,8 @@ Version 2.0 was the original core idea: scheduled `.deb`/AppImage updates via sy
 If you're on 2.0, none of your setup breaks moving to 2.1; it's additive the whole way.
 
 2.2.x introduces Service file separation from the GUI. Before, you used to have to have the tray icon always open to get updates. Now, the timers and service files work without the tray needing to be open. 
+
+2.2.1 Introduces prerelease downloads, if an application is in prerelease in a GitHub page, it will now download if you add it. Update catalog now updates links and regex that match the catalog, just regenerate scripts after for the .timer and .service files to update them.
 
 ## Two ways to track a version
 
