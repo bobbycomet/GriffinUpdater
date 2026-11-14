@@ -12,6 +12,17 @@
       "package_name": "discord"
     },
     {
+      "id": "ultracombo",
+      "name": "UltraCombo",
+      "category": "appimage",
+      "source_type": "github_release",
+      "github_owner": "thefixinhixon",
+      "github_repo": "UltraCombo",
+      "asset_pattern": "^UltraCombo-x86_64\\.AppImage$",
+      "include_prereleases": true,
+      "description": "Native PC ports of the Killer Instinct arcade games"
+    },
+    {
       "id": "opentabletdriver",
       "name": "OpenTabletDriver",
       "category": "deb",
