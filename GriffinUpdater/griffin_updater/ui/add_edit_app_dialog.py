@@ -44,11 +44,12 @@ class AddEditAppDialog(QDialog):
         basics.addRow("Package type:", self.category_combo)
 
         self.source_combo = QComboBox()
-        self.source_combo.addItems(["static_url", "github_release"])
+        self.source_combo.addItems(["static_url", "github_release", "gitea_release"])
         self.source_combo.setToolTip(
             "Static URL: a link that always redirects to the current file (e.g. Discord).\n"
             "GitHub Repo: queries the GitHub Releases API so it keeps working even when\n"
-            "release asset filenames change version-to-version (e.g. OpenTabletDriver)."
+            "release asset filenames change version-to-version (e.g. OpenTabletDriver).\n"
+            "Gitea Repo: queries the Gitea/Forgejo Releases API (e.g. Codeberg)."
         )
         self.source_combo.currentTextChanged.connect(self._on_source_changed)
         basics.addRow("Update source:", self.source_combo)
@@ -69,14 +70,19 @@ class AddEditAppDialog(QDialog):
         # --- github release fields ---
         self.github_group = QGroupBox("GitHub Repo")
         gh_form = QFormLayout(self.github_group)
+        self.gitea_host_edit = QLineEdit("codeberg.org")
+        self.gitea_host_edit.setPlaceholderText("e.g. codeberg.org or git.example.com")
+        gh_form.addRow("Gitea host:", self.gitea_host_edit)
+        self.repo_owner_label = QLabel("Owner:")
+        self.repo_name_label = QLabel("Repo:")
         self.gh_owner_edit = QLineEdit()
         self.gh_owner_edit.setPlaceholderText("e.g. OpenTabletDriver")
         self.gh_repo_edit = QLineEdit()
         self.gh_repo_edit.setPlaceholderText("e.g. OpenTabletDriver")
         self.asset_pattern_edit = QLineEdit()
         self.asset_pattern_edit.setPlaceholderText(r"regex, e.g. x64\.deb$")
-        gh_form.addRow("Owner:", self.gh_owner_edit)
-        gh_form.addRow("Repo:", self.gh_repo_edit)
+        gh_form.addRow(self.repo_owner_label, self.gh_owner_edit)
+        gh_form.addRow(self.repo_name_label, self.gh_repo_edit)
         gh_form.addRow("Asset filename pattern:", self.asset_pattern_edit)
         self.prerelease_check = QCheckBox("Include pre-releases (alpha/beta)")
         self.prerelease_check.setToolTip(
@@ -213,7 +219,13 @@ class AddEditAppDialog(QDialog):
 
     def _on_source_changed(self, source: str):
         self.static_group.setVisible(source == "static_url")
-        self.github_group.setVisible(source == "github_release")
+        self.github_group.setVisible(source in ("github_release", "gitea_release"))
+        self.github_group.setTitle(
+            "Gitea / Forgejo Repo" if source == "gitea_release" else "GitHub Repo"
+        )
+        self.repo_owner_label.setText("Gitea owner:" if source == "gitea_release" else "GitHub owner:")
+        self.repo_name_label.setText("Gitea repo:" if source == "gitea_release" else "GitHub repo:")
+        self.gitea_host_edit.setVisible(source == "gitea_release")
 
     def _on_frequency_changed(self, freq: str):
         self.weekday_combo.setEnabled(freq == "weekly")
@@ -244,8 +256,13 @@ class AddEditAppDialog(QDialog):
         self.source_combo.setCurrentText(e.source_type)
         self.url_edit.setText(e.url)
         self.version_regex_edit.setText(e.version_regex)
-        self.gh_owner_edit.setText(e.github_owner)
-        self.gh_repo_edit.setText(e.github_repo)
+        if e.source_type == "gitea_release":
+            self.gitea_host_edit.setText(e.gitea_host or "codeberg.org")
+            self.gh_owner_edit.setText(e.gitea_owner)
+            self.gh_repo_edit.setText(e.gitea_repo)
+        else:
+            self.gh_owner_edit.setText(e.github_owner)
+            self.gh_repo_edit.setText(e.github_repo)
         self.asset_pattern_edit.setText(e.asset_pattern)
         self.prerelease_check.setChecked(e.include_prereleases)
         self.package_name_edit.setText(e.package_name)
@@ -291,6 +308,9 @@ class AddEditAppDialog(QDialog):
         if source_type == "github_release" and not (self.gh_owner_edit.text().strip() and self.gh_repo_edit.text().strip()):
             QMessageBox.warning(self, "Missing repo", "Please enter both a GitHub owner and repo.")
             return
+        if source_type == "gitea_release" and not (self.gh_owner_edit.text().strip() and self.gh_repo_edit.text().strip()):
+            QMessageBox.warning(self, "Missing repo", "Please enter both a Gitea owner and repo.")
+            return
 
         t = self.time_edit.time()
         schedule = Schedule(
@@ -309,8 +329,26 @@ class AddEditAppDialog(QDialog):
             description=self.desc_edit.text().strip(),
             url=self.url_edit.text().strip(),
             version_regex=self.version_regex_edit.text().strip(),
-            github_owner=self.gh_owner_edit.text().strip(),
-            github_repo=self.gh_repo_edit.text().strip(),
+            github_owner=(
+                self.gh_owner_edit.text().strip()
+                if source_type == "github_release" else self.entry.github_owner
+            ),
+            github_repo=(
+                self.gh_repo_edit.text().strip()
+                if source_type == "github_release" else self.entry.github_repo
+            ),
+            gitea_host=(
+                self.gitea_host_edit.text().strip() or "codeberg.org"
+                if source_type == "gitea_release" else self.entry.gitea_host
+            ),
+            gitea_owner=(
+                self.gh_owner_edit.text().strip()
+                if source_type == "gitea_release" else self.entry.gitea_owner
+            ),
+            gitea_repo=(
+                self.gh_repo_edit.text().strip()
+                if source_type == "gitea_release" else self.entry.gitea_repo
+            ),
             asset_pattern=self.asset_pattern_edit.text().strip(),
             include_prereleases=self.prerelease_check.isChecked(),
             package_name=self.package_name_edit.text().strip(),

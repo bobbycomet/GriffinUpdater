@@ -23,6 +23,7 @@ import re
 import subprocess
 from dataclasses import dataclass
 from typing import Optional
+from urllib.parse import quote, unquote, urlsplit
 
 import requests
 
@@ -129,6 +130,96 @@ def resolve_github_release(owner: str, repo: str, asset_pattern: str,
             owner, repo, False,
         )]
 
+    return _pick_release_asset(releases, f"{owner}/{repo}", asset_pattern)
+
+
+def _gitea_api_url(host: str, owner: str, repo: str, endpoint: str) -> str:
+    host = host.strip().rstrip("/") or "codeberg.org"
+    if "://" not in host:
+        host = f"https://{host}"
+    parsed = urlsplit(host)
+    if (parsed.scheme not in ("http", "https") or not parsed.netloc
+            or parsed.username or parsed.password or parsed.query or parsed.fragment):
+        raise VersionResolutionError(f"Invalid Gitea host '{host}'.")
+    base_path = parsed.path.rstrip("/")
+    release_url = (
+        f"{parsed.scheme}://{parsed.netloc}{base_path}/api/v1/repos/"
+        f"{quote(owner, safe='')}/{quote(repo, safe='')}/releases"
+    )
+    if endpoint.startswith("?"):
+        return release_url + endpoint
+    return f"{release_url}/{endpoint}" if endpoint else release_url
+
+
+def _gitea_get(api_url: str, owner: str, repo: str, include_prereleases: bool):
+    try:
+        resp = requests.get(
+            api_url, timeout=TIMEOUT,
+            headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
+        )
+    except requests.RequestException as exc:
+        raise VersionResolutionError(f"Could not reach Gitea API: {exc}") from exc
+
+    if resp.status_code == 404:
+        hint = "" if include_prereleases else (
+            " If this project only publishes pre-releases, enable "
+            "'Include pre-releases' for this app."
+        )
+        raise VersionResolutionError(f"No releases found for {owner}/{repo}.{hint}")
+    if resp.status_code >= 400:
+        raise VersionResolutionError(f"Gitea API returned HTTP {resp.status_code}")
+    try:
+        return resp.json()
+    except ValueError as exc:
+        raise VersionResolutionError(f"Gitea API returned invalid JSON: {exc}") from exc
+
+
+def resolve_gitea_release(host: str, owner: str, repo: str, asset_pattern: str,
+                          include_prereleases: bool = False) -> ResolvedVersion:
+    if not (owner and repo):
+        raise VersionResolutionError("Gitea owner/repo not set.")
+
+    if include_prereleases:
+        data = _gitea_get(
+            _gitea_api_url(host, owner, repo, "?limit=30"),
+            owner, repo, True,
+        )
+        if not isinstance(data, list):
+            raise VersionResolutionError(f"Unexpected Gitea API response for {owner}/{repo}.")
+        releases = [release for release in data if not release.get("draft")]
+        if not releases:
+            raise VersionResolutionError(f"No published releases found for {owner}/{repo}.")
+    else:
+        releases = [_gitea_get(
+            _gitea_api_url(host, owner, repo, "latest"),
+            owner, repo, False,
+        )]
+
+    releases = [
+        {**release, "assets": _gitea_release_assets(release)}
+        for release in releases
+    ]
+    return _pick_release_asset(releases, f"{owner}/{repo}", asset_pattern)
+
+
+def _gitea_release_assets(release: dict) -> list[dict]:
+    assets = list(release.get("assets") or [])
+    known_urls = {asset.get("browser_download_url") for asset in assets}
+    body = release.get("body") or ""
+    for match in re.finditer(r"\[[^\]]*\]\((https?://[^)\s]+)\)", body):
+        url = match.group(1).rstrip(".,;")
+        parsed = urlsplit(url)
+        name = unquote(parsed.path.rsplit("/", 1)[-1])
+        if (parsed.scheme not in ("http", "https") or not parsed.netloc
+                or parsed.username or parsed.password or not name or url in known_urls):
+            continue
+        assets.append({"name": name, "browser_download_url": url})
+        known_urls.add(url)
+    return assets
+
+
+def _pick_release_asset(releases: list[dict], repo_label: str,
+                        asset_pattern: str) -> ResolvedVersion:
     pattern = asset_pattern.strip() or r".*\.(deb|AppImage)$"
     try:
         regex = re.compile(pattern, re.IGNORECASE)
@@ -138,19 +229,23 @@ def resolve_github_release(owner: str, repo: str, asset_pattern: str,
     # Newest release that actually contains a matching asset.
     for rel in releases:
         for asset in rel.get("assets", []) or []:
-            if regex.search(asset.get("name", "")):
+            name = asset.get("name", "")
+            if regex.search(name):
                 tag = str(rel.get("tag_name", "")).lstrip("vV")
                 if not tag:
-                    tag = _extract_version(asset["name"], DEFAULT_VERSION_REGEX) or "unknown"
+                    tag = _extract_version(name, DEFAULT_VERSION_REGEX) or "unknown"
+                download_url = asset.get("browser_download_url")
+                if not download_url:
+                    continue
                 return ResolvedVersion(
                     version=tag,
-                    download_url=asset["browser_download_url"],
-                    filename=asset["name"],
+                    download_url=download_url,
+                    filename=name,
                 )
 
     seen = [a.get("name", "?") for r in releases[:3] for a in (r.get("assets") or [])]
     raise VersionResolutionError(
-        f"No release asset in {owner}/{repo} matched pattern '{pattern}'. "
+        f"No release asset in {repo_label} matched pattern '{pattern}'. "
         f"Available assets: {', '.join(seen) or '(no assets)'}"
     )
 
@@ -161,6 +256,11 @@ def resolve(entry) -> ResolvedVersion:
         return resolve_github_release(
             entry.github_owner, entry.github_repo, entry.asset_pattern,
             getattr(entry, "include_prereleases", False),
+        )
+    if entry.source_type == "gitea_release":
+        return resolve_gitea_release(
+            entry.gitea_host, entry.gitea_owner, entry.gitea_repo,
+            entry.asset_pattern, entry.include_prereleases,
         )
     return resolve_static_url(entry.url, entry.version_regex)
 

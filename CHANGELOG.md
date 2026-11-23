@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.2.2
+
+### Fixed
+- **Implemented the documented Gitea/Forgejo release source.** Gitea
+  configuration now loads and saves, `gitea_release` queries the configured
+  instance's Releases API and selects the matching asset, and Gitea is
+  available in the Add/Edit dialog. Release-body Markdown links are also
+  used when an instance (such as Eden's) returns no API assets.
+
+### Added
+- GitHub Actions now builds the AppImage on pushes, pull requests, and
+  manual runs, then uploads it as a downloadable workflow artifact.
+
 ## Added Kalium to the apps catalog, no version change needed.
 
 ## v2.1.0

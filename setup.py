@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="griffin-updater",
-    version="2.2.0",
+    version="2.2.2",
     description="Griffin Updater - schedule-based .deb/AppImage updater with a shared app catalog",
     author="Bobby",
     packages=find_packages(include=["griffin_updater", "griffin_updater.*"]),

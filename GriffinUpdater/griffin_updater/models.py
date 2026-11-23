@@ -10,7 +10,7 @@ from typing import Any, Optional
 from . import config
 
 VALID_CATEGORIES = ("deb", "appimage", "archive")
-VALID_SOURCE_TYPES = ("static_url", "github_release")
+VALID_SOURCE_TYPES = ("static_url", "github_release", "gitea_release")
 VALID_FREQUENCIES = ("daily", "weekly", "monthly", "custom")
 
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -63,7 +63,7 @@ class AppEntry:
     id: str
     name: str
     category: str = "deb"                 # deb | appimage
-    source_type: str = "static_url"       # static_url | github_release
+    source_type: str = "static_url"       # static_url | github_release | gitea_release
     description: str = ""
     icon: str = ""
 
@@ -75,7 +75,12 @@ class AppEntry:
     github_owner: str = ""
     github_repo: str = ""
     asset_pattern: str = ""               # regex matched against release asset filenames
-    include_prereleases: bool = False     # also consider GitHub pre-releases (drafts are always skipped)
+    include_prereleases: bool = False     # also consider published pre-releases (drafts are skipped)
+
+    # gitea_release mode
+    gitea_host: str = "codeberg.org"
+    gitea_owner: str = ""
+    gitea_repo: str = ""
 
     # deb-specific
     package_name: str = ""                # dpkg package name, defaults to id if blank
