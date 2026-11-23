@@ -73,7 +73,6 @@
       "include_prereleases": false,
       "package_name": "",
       "sha256": "",
-      "appimage_target_dir": "/mnt/... #deleted personal folder#",
       "appimage_filename": "Eden-Nightly-x86_64.AppImage",
       "delete_old_appimage": true,
       "archive_install_dir": "",
