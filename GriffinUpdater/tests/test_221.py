@@ -68,6 +68,46 @@ def fake_get3(url, **kw):
 with mock.patch.object(V.requests, "get", fake_get3):
     check("default path unchanged (/latest)", V.resolve_github_release("o", "r", "", False).version == "3.0.0")
 
+# -------------------------------------------------------------- Gitea releases
+eden_pattern = r"^Eden-Linux-[0-9a-f]{10}-amd64-clang-pgo\.AppImage$"
+gitea_calls = []
+def fake_gitea_get(url, **kw):
+    gitea_calls.append(url)
+    return Resp(200, rel("v4089cfcffd", assets=[
+        "Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage",
+        "Eden-Linux-4089cfcffd-amd64-clang.AppImage",
+    ]))
+
+eden = models.AppEntry(
+    id="eden", name="Eden Nightly", category="appimage",
+    source_type="gitea_release", gitea_host="git.eden-emu.dev",
+    gitea_owner="eden-ci", gitea_repo="nightly", asset_pattern=eden_pattern,
+)
+with mock.patch.object(V.requests, "get", fake_gitea_get):
+    gitea_result = V.resolve(eden)
+check("Gitea dispatch selects Eden's matching asset", gitea_result.filename ==
+      "Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage")
+check("Gitea dispatch uses release download URL", gitea_result.download_url ==
+      "https://x/v4089cfcffd/Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage")
+check("Gitea uses configured releases API host and repo",
+      gitea_calls[-1] == "https://git.eden-emu.dev/api/v1/repos/eden-ci/nightly/releases/latest")
+
+def fake_gitea_list(url, **kw):
+    gitea_calls.append(url)
+    return Resp(200, [
+        rel("v2.0.0", draft=True, assets=["Eden-Linux-1234567890-amd64-clang-pgo.AppImage"]),
+        rel("v1.9.0", pre=True, assets=["Eden-Linux-1234567890-amd64-clang-pgo.AppImage"]),
+    ])
+with mock.patch.object(V.requests, "get", fake_gitea_list):
+    prerelease = V.resolve_gitea_release(
+        "https://git.example.test/gitea/", "eden-ci", "nightly",
+        eden_pattern, include_prereleases=True,
+    )
+check("Gitea pre-release mode skips drafts", prerelease.version == "1.9.0")
+check("Gitea supports self-hosted subpath and release list API",
+      gitea_calls[-1] ==
+      "https://git.example.test/gitea/api/v1/repos/eden-ci/nightly/releases?limit=30")
+
 # resolve() honours entry flag; missing attr -> False
 e = models.AppEntry(id="u", name="U", category="appimage", source_type="github_release",
                     github_owner="o", github_repo="r", asset_pattern=pat, include_prereleases=True)
@@ -151,6 +191,17 @@ d = e.to_dict()
 check("model roundtrip keeps include_prereleases", models.AppEntry.from_dict(d).include_prereleases is True)
 check("old my_apps.json without the key defaults to False",
       models.AppEntry.from_dict({"id": "a", "name": "A"}).include_prereleases is False)
+eden_roundtrip = models.AppEntry.from_dict(eden.to_dict())
+check("model roundtrip preserves Gitea source fields",
+      (eden_roundtrip.source_type, eden_roundtrip.gitea_host, eden_roundtrip.gitea_owner,
+       eden_roundtrip.gitea_repo, eden_roundtrip.asset_pattern) ==
+      ("gitea_release", "git.eden-emu.dev", "eden-ci", "nightly", eden_pattern))
+models.save_apps([eden])
+eden_loaded = models.load_apps()[0]
+check("my_apps.json load/save preserves Gitea source fields",
+      (eden_loaded.source_type, eden_loaded.gitea_host, eden_loaded.gitea_owner,
+       eden_loaded.gitea_repo, eden_loaded.asset_pattern) ==
+      ("gitea_release", "git.eden-emu.dev", "eden-ci", "nightly", eden_pattern))
 
 # --------------------------------------------------------- catalog sync
 config.ensure_dirs()
@@ -180,6 +231,20 @@ local.include_prereleases = True
 config.CATALOG_CACHE_FILE.write_text(json.dumps({"apps": [{"id": "ultracombo", "name": "UltraCombo"}]}))
 check("absent catalog key leaves local value alone", catalog.apply_catalog_updates([local]) == [] and local.include_prereleases)
 
+gitea_local = models.AppEntry(
+    id="catalog-gitea", name="Catalog Gitea", source_type="gitea_release",
+    gitea_host="old.example", gitea_owner="old", gitea_repo="old",
+    from_catalog=True,
+)
+config.CATALOG_CACHE_FILE.write_text(json.dumps({"apps": [{
+    "id": "catalog-gitea", "name": "Catalog Gitea", "source_type": "gitea_release",
+    "gitea_host": "git.example", "gitea_owner": "team", "gitea_repo": "project",
+}]}))
+catalog.apply_catalog_updates([gitea_local])
+check("catalog sync preserves Gitea source fields",
+      (gitea_local.gitea_host, gitea_local.gitea_owner, gitea_local.gitea_repo) ==
+      ("git.example", "team", "project"))
+
 # ---------------------------------------------------------------- Qt UI
 from PyQt6.QtWidgets import QApplication
 app = QApplication([])
@@ -193,6 +258,13 @@ check("dialog saves pre-release flag", dlg.result_entry.include_prereleases is F
 dlg2 = AddEditAppDialog(); dlg2.name_edit.setText("New"); dlg2.url_edit.setText("http://x")
 dlg2.prerelease_check.setChecked(True); dlg2._on_accept()
 check("new-app dialog carries flag", dlg2.result_entry.include_prereleases is True)
+dlg3 = AddEditAppDialog(entry=eden)
+check("dialog exposes Gitea source selection", dlg3.source_combo.findText("gitea_release") >= 0)
+dlg3._on_accept()
+check("dialog saves Gitea source configuration",
+      (dlg3.result_entry.source_type, dlg3.result_entry.gitea_host,
+       dlg3.result_entry.gitea_owner, dlg3.result_entry.gitea_repo) ==
+      ("gitea_release", "git.eden-emu.dev", "eden-ci", "nightly"))
 
 # MainWindow + catalog update path (no network: refresh_catalog patched)
 models.save_apps([local])

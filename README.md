@@ -50,7 +50,9 @@ If you're on 2.0, none of your setup breaks moving to 2.1; it's additive the who
 
 2.2.x introduces Service file separation from the GUI. Before, you used to have to have the tray icon always open to get updates. Now, the timers and service files work without the tray needing to be open. 
 
-2.2.1 Introduces prerelease downloads, if an application is in prerelease in a GitHub page, it will now download if you add it. Update catalog now updates links and regex that match the catalog, just regenerate scripts after for the .timer and .service files to update them.
+2.2.2 restores Gitea/Forgejo release tracking and adds a GitHub Actions AppImage build artifact for branch testing.
+
+2.2.1 introduced prerelease downloads for GitHub releases. Update Catalog now updates links and regexes that match the catalog; regenerate scripts afterward to update the `.timer` and `.service` files.
 
 ## Two ways to track a version
 
@@ -174,13 +176,13 @@ Drop `packaging/griffin-updater.desktop` into `~/.local/share/applications/` (ad
 <details>
 <summary><strong>Building the AppImage yourself</strong></summary>
 
-Everything's already wired up: `packaging/griffin-updater.spec` is the PyInstaller spec, `packaging/run_griffin_updater.py` is the entry-point shim, `packaging/AppRun` handles launch behavior, and `packaging/build-appimage.sh` runs the whole process end to end.
+Everything's already wired up under `GriffinUpdater/`: `packaging/build_appimage.sh` builds the AppImage end to end.
 
 ```bash
-bash packaging/build-appimage.sh
+bash GriffinUpdater/packaging/build_appimage.sh
 ```
 
-This creates an isolated venv under `build/venv`, installs `requirements.txt` plus PyInstaller into it (kept separate from your system PyQt6 so the AppImage bundles its own Qt), runs PyInstaller against the spec to produce a onedir bundle in `dist/griffin-updater/`, assembles `build/AppDir/`, and downloads `appimagetool` (cached under `build/tools/`) to produce `Griffin-Updater-x86_64.AppImage` in the project root.
+The build produces `GriffinUpdater/dist/GriffinUpdater-<version>-x86_64.AppImage`. The GitHub Actions **Build AppImage** workflow runs this script on pushes and pull requests; download its artifact from the workflow run to test a branch build.
 
 PyInstaller will warn — not fail — if `libxcb-cursor0` and `libtiff5`/`libtiff6` aren't present on the build machine; it just won't bundle them, so whatever machine runs the AppImage needs them installed already. Both are extremely common on any desktop Kubuntu or Griffin Linux install, but for a fully self-contained build, run `apt install libxcb-cursor0 libtiff6` first.
 

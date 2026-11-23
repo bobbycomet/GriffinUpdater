@@ -161,7 +161,8 @@ def catalog_entry_to_app_entry(row: dict[str, Any]) -> AppEntry:
 # install dirs, sha256, forced filename...) stays under the user's control.
 CATALOG_SYNCED_FIELDS = (
     "name", "description", "category", "source_type", "url", "version_regex",
-    "github_owner", "github_repo", "asset_pattern", "include_prereleases",
+    "github_owner", "github_repo", "gitea_host", "gitea_owner", "gitea_repo",
+    "asset_pattern", "include_prereleases",
     "package_name", "archive_executable_pattern",
 )
 
