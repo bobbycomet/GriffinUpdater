@@ -109,7 +109,7 @@ Want your app added? Join the Discord and drop it in the feature-request channel
 - `version_regex` — static_url only; optional, defaults to an N.N.N-style token.
 - `github_owner` / `github_repo` — github_release only.
 - `gitea_host` (defaults to `codeberg.org`) / `gitea_owner` / `gitea_repo` — gitea_release only.
-- `asset_pattern` — github_release/gitea_release only; regex matched against release asset filenames. Be specific if a release ships more than one asset of the same file type (e.g. per-architecture `.deb`s) — Griffin Updater takes the first match, so a loose pattern can silently grab the wrong one.
+- `asset_pattern` — `github_release`/`gitea_release` only; regex matched against release asset filenames. For Gitea/Forgejo servers that publish download URLs in release notes instead of API assets, absolute Markdown links are matched too. Be specific if a release ships multiple similar assets (e.g. per-architecture builds) — Griffin Updater takes the first match.
 - `package_name` — deb entries only; defaults to `id`.
 
 Apps that ship both a `.deb` and an AppImage can use a `variants` list instead of top-level fields — Griffin Updater will ask which one you want tracked when you add it.

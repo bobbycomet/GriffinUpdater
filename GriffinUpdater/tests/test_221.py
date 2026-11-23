@@ -92,6 +92,25 @@ check("Gitea dispatch uses release download URL", gitea_result.download_url ==
 check("Gitea uses configured releases API host and repo",
       gitea_calls[-1] == "https://git.eden-emu.dev/api/v1/repos/eden-ci/nightly/releases/latest")
 
+eden_body_release = rel("v1795217457.4089cfcffd")
+eden_body_release["body"] = (
+    "## Linux\n"
+    "[Standard AppImage](https://nightly.eden-emu.dev/v1795217457.4089cfcffd/"
+    "Eden-Linux-4089cfcffd-amd64-gcc-standard.AppImage)\n"
+    "[PGO AppImage](https://nightly.eden-emu.dev/v1795217457.4089cfcffd/"
+    "Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage)"
+)
+with mock.patch.object(V.requests, "get", return_value=Resp(200, eden_body_release)):
+    body_result = V.resolve_gitea_release(
+        "git.eden-emu.dev", "eden-ci", "nightly", eden_pattern,
+    )
+check("Gitea resolves matching release-body links when API assets are empty",
+      body_result.filename == "Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage")
+check("Gitea release-body link keeps its external download URL",
+      body_result.download_url ==
+      "https://nightly.eden-emu.dev/v1795217457.4089cfcffd/"
+      "Eden-Linux-4089cfcffd-amd64-clang-pgo.AppImage")
+
 def fake_gitea_list(url, **kw):
     gitea_calls.append(url)
     return Resp(200, [

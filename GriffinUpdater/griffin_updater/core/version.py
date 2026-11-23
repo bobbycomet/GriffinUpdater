@@ -23,7 +23,7 @@ import re
 import subprocess
 from dataclasses import dataclass
 from typing import Optional
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 import requests
 
@@ -195,7 +195,27 @@ def resolve_gitea_release(host: str, owner: str, repo: str, asset_pattern: str,
             owner, repo, False,
         )]
 
+    releases = [
+        {**release, "assets": _gitea_release_assets(release)}
+        for release in releases
+    ]
     return _pick_release_asset(releases, f"{owner}/{repo}", asset_pattern)
+
+
+def _gitea_release_assets(release: dict) -> list[dict]:
+    assets = list(release.get("assets") or [])
+    known_urls = {asset.get("browser_download_url") for asset in assets}
+    body = release.get("body") or ""
+    for match in re.finditer(r"\[[^\]]*\]\((https?://[^)\s]+)\)", body):
+        url = match.group(1).rstrip(".,;")
+        parsed = urlsplit(url)
+        name = unquote(parsed.path.rsplit("/", 1)[-1])
+        if (parsed.scheme not in ("http", "https") or not parsed.netloc
+                or parsed.username or parsed.password or not name or url in known_urls):
+            continue
+        assets.append({"name": name, "browser_download_url": url})
+        known_urls.add(url)
+    return assets
 
 
 def _pick_release_asset(releases: list[dict], repo_label: str,
