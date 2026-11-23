@@ -58,6 +58,39 @@
       "archive_subdir_name": "Godot-Mono",
       "archive_executable_pattern": "^Godot_v[0-9.]+-stable_mono_linux\\.x86_64$",
       "archive_symlink_name": "godot-mono"
+    },
+    {
+      "id": "eden",
+      "name": "Eden Nightly",
+      "category": "appimage",
+      "source_type": "gitea_release",
+      "description": "Eden Nintendo Switch Emulator - Nightly x86_64 Clang PGO",
+      "icon": "",
+      "gitea_host": "git.eden-emu.dev",
+      "gitea_owner": "eden-ci",
+      "gitea_repo": "nightly",
+      "asset_pattern": "^Eden-Linux-[0-9a-f]{10}-amd64-clang-pgo\\.AppImage$",
+      "include_prereleases": false,
+      "package_name": "",
+      "sha256": "",
+      "appimage_target_dir": "/mnt/... #deleted personal folder#",
+      "appimage_filename": "Eden-Nightly-x86_64.AppImage",
+      "delete_old_appimage": true,
+      "archive_install_dir": "",
+      "archive_subdir_name": "",
+      "archive_executable_pattern": "",
+      "archive_delete_old": true,
+      "archive_symlink_name": "",
+      "enabled": true,
+      "notify": true,
+      "schedule": {
+        "frequency": "daily",
+        "time": "20:00",
+        "day_of_week": "Sun",
+        "day_of_month": 1,
+        "custom_oncalendar": ""
+      },
+      "from_catalog": false
     }
   ]
 }
