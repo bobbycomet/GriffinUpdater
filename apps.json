@@ -90,6 +90,139 @@
         "custom_oncalendar": ""
       },
       "from_catalog": false
+    },
+    {
+      "id": "griffin-persona",
+      "name": "Griffin Persona",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Griffin Persona",
+      "github_owner": "bobbycomet",
+      "github_repo": "GriffinPersona",
+      "asset_pattern": "^Griffin_Persona-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "griffin-hub",
+      "name": "Griffin Hub",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Griffin Hub",
+      "github_owner": "bobbycomet",
+      "github_repo": "Griffin-Hub",
+      "asset_pattern": "^GriffinHub-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "xkm",
+      "name": "XKM Multi Kernel Manager",
+      "category": "deb",
+      "source_type": "github_release",
+      "description": "Multi Kernel Manager",
+      "github_owner": "bobbycomet",
+      "github_repo": "XKM-Multi-Kernel-Manager",
+      "asset_pattern": "^XKM\\.deb$",
+      "package_name": "xkm"
+    },
+    {
+      "id": "fan-hub",
+      "name": "Fan Hub",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Fan Hub",
+      "github_owner": "bobbycomet",
+      "github_repo": "Fan-Hub",
+      "asset_pattern": "^FanHub-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "bot-forge-studio",
+      "name": "Bot Forge Studio",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Bot Forge Studio",
+      "github_owner": "bobbycomet",
+      "github_repo": "Bot-Forge-Studio",
+      "asset_pattern": "^BotForgeStudio-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "kernel-autotune",
+      "name": "Kernel Autotune V2",
+      "category": "deb",
+      "source_type": "github_release",
+      "description": "Kernel Autotune V2",
+      "github_owner": "bobbycomet",
+      "github_repo": "kernel-autotune-V2",
+      "asset_pattern": "^kernel-autotune_.*\\.deb$",
+      "package_name": "kernel-autotune"
+    },
+    {
+      "id": "process-sentry",
+      "name": "Process Sentry",
+      "category": "deb",
+      "source_type": "github_release",
+      "description": "Process Sentry",
+      "github_owner": "bobbycomet",
+      "github_repo": "Process-Sentry",
+      "asset_pattern": "^sentry_.*\\.deb$",
+      "package_name": "sentry"
+    },
+    {
+      "id": "fetch-studio",
+      "name": "Fetch Studio",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Fetch Studio",
+      "github_owner": "bobbycomet",
+      "github_repo": "Fetch-Studio",
+      "asset_pattern": "^FetchStudio-x86_64\\.AppImage$"
+    },
+    {
+      "id": "gkm",
+      "name": "GKM",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "GKM",
+      "github_owner": "bobbycomet",
+      "github_repo": "GKM",
+      "asset_pattern": "^GKM-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "kalium",
+      "name": "Kalium",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Kalium",
+      "github_owner": "bobbycomet",
+      "github_repo": "Kalium",
+      "asset_pattern": "^Kalium-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "grix",
+      "name": "Grix",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Grix",
+      "github_owner": "bobbycomet",
+      "github_repo": "Grix",
+      "asset_pattern": "^Grix-x86_64\\.AppImage$"
+    },
+    {
+      "id": "appify",
+      "name": "Appify",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Appify",
+      "github_owner": "bobbycomet",
+      "github_repo": "Appify",
+      "asset_pattern": "^Appify-.*-x86_64\\.AppImage$"
+    },
+    {
+      "id": "conky-studio",
+      "name": "Conky Studio",
+      "category": "appimage",
+      "source_type": "github_release",
+      "description": "Conky Studio",
+      "github_owner": "bobbycomet",
+      "github_repo": "Conky-Studio",
+      "asset_pattern": "^Conky-Studio-.*-x86_64\\.AppImage$"
     }
   ]
 }
